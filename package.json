@@ -1,0 +1,13 @@
+{
+  "name": "ai-hw-advisor",
+  "version": "1.0.0",
+  "description": "Zaverecny projekt var A",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "openai": "^4.38.3",
+    "pg": "^8.11.5"
+  }
+}

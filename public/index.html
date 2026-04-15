@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI HW Rádce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Hardwarový Rádce</h1>
+            <p>Najetím myší na obrázek AI prozkoumá odpovídající hardware.</p>
+        </header>
+
+        <main>
+            <div class="interactive-panel">
+                <div class="selected-model-area">
+                    <div id="product-image-container" class="product-image-container">
+                        <img id="product-icon" src="https://img.icons8.com/color/192/000000/laptop--v1.png" alt="Hardware Image">
+                        <div class="hover-overlay">Najed' na mne myší!</div>
+                    </div>
+                </div>
+
+                <div class="controls-area">
+                    <h3>Kategorie k prozkoumání</h3>
+                    <div class="categories">
+                        <button class="cat-btn active" data-cat="notebook">💻 Notebook</button>
+                        <button class="cat-btn" data-cat="mobilní telefon">📱 Mobilní telefon</button>
+                        <button class="cat-btn" data-cat="stolní PC">🖥️ Stolní PC</button>
+                        <button class="cat-btn" data-cat="tablet">📋 Tablet</button>
+                    </div>
+
+                    <h3>Cenová preference pro AI</h3>
+                    <div class="price-prefs">
+                        <button class="price-btn" data-pref="levnější">⬇️ Levnější</button>
+                        <button class="price-btn active" data-pref="normal">Standardní</button>
+                        <button class="price-btn" data-pref="dražší">⬆️ Dražší</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-response-area">
+                <div id="ai-loader" class="loader hidden"></div>
+                <div id="ai-response-content">
+                    <em>Výsledek analýzy od AI získáte najetím na obrázek výše.</em>
+                </div>
+            </div>
+
+            <div class="search-section">
+                <h2>Specifické vyhledávání</h2>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Zadej název produktu (např. iPhone 15)...">
+                    <button id="search-btn">Hledat přes AI</button>
+                </div>
+                <div id="search-result" class="search-result"></div>
+            </div>
+            
+        </main>
+        
+        <aside class="history-panel">
+            <h2>Historie z Databáze</h2>
+            <button id="refresh-history-btn">Obnovit historii</button>
+            <div class="history-block">
+                <h3>Vyděné Kategorie</h3>
+                <ul id="viewed-history-list"></ul>
+            </div>
+            <div class="history-block">
+                <h3>Hledané Výrazy</h3>
+                <ul id="searched-history-list"></ul>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
