@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             aiLoader.classList.add('hidden');
 
+            if (data.success) {
                 // Získáme přesný název hardwaru pro vytvoření 100% fungujícího odkazu
                 const nameMatch = data.text.match(/Název:\s*(.+)/);
                 const queryTerm = nameMatch ? encodeURIComponent(nameMatch[1].trim()) : '';
