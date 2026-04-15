@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Hezky obarvíme odpověď
                 let text = data.text.replace(/Název:/g, '<strong style="color: #38bdf8;">Název:</strong>')
                                       .replace(/Cena:/g, '<strong style="color: #fbbf24;">Cena:</strong>')
+                                      .replace(/Benchmark:/g, '<strong style="color: #f43f5e;">🏆 Žebříčkové skóre:</strong>')
                                       .replace(/Parametry:/g, '<strong style="color: #38bdf8;">Parametry:</strong>')
                                       .replace(/Komentář:/g, '<strong style="color: #818cf8;">Komentář:</strong>')
                                       .replace(/FPS:/g, '<strong style="color: #4ade80;">Herní výkon (FPS):</strong>');

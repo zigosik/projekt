@@ -73,15 +73,17 @@ app.post('/api/evaluate-hover', async (req, res) => {
             [category, pricePref]
         );
 
-        const prompt = `Představ si, že navrhuješ reálný kus hardwaru v kategorii "${category}".
-Cenová preference uživatele je: ${pricePref === 'levnější' ? 'chce levnější model' : pricePref === 'dražší' ? 'chce prémiový dražší model' : 'chce standardní model'}.
-Vymysli a popiš konkrétní zařízení. Nezdůvodňuj proč, jen vydej daný formát:
+        const prompt = `Jsi tvrdý hardwarový expert s naprostou pamětí na světové benchmark žebříčky (Antutu pro mobily/tablety a PassMark/3DMark pro PC a laptopy).
+Tvojí úlohou je vybrat 100% REÁLNÝ dosud existující produkt v kategorii "${category}".
+Výkonnostní preference uživatele je: ${pricePref === 'levnější' ? 'vyber levný model ze spodku benchmarků (malé skóre).' : pricePref === 'dražší' ? 'vyber absolutní vlajkovou loď z TOP 10 tabulek žebříčků (obří skóre).' : 'vyber střední třídu se středním skórem.'}.
+Vyber reálný kus podle těchto parametrů. Nic dalšího nezdůvodňuj a striktně vydej tento formát:
 
-Název: [Reálný nebo vymyšlený název]
-Cena: [Odhadovaná cena produktu v Kč]
-Parametry: [Procesor, RAM, Displej, Baterka - jen výčet s čárkami]
-Komentář: [Jedna krátká věta, proč to doporučuješ]
-FPS: [Uveď konkrétní číslo například GTA V: 60 FPS, CS2: 120 FPS]`;
+Název: [Přesný reálný název vybraného produktu]
+Cena: [Odhadovaná cena v Kč]
+Benchmark: [Uveď jméno žebříčku a bodové skóre vybraného modelu, např. Antutu v10: 1 530 000 bodů]
+Parametry: [Procesor, RAM, Displej, Baterka/GPU - jen výčet s čárkami]
+Komentář: [Krátká analytická věta k tomuto stroji]
+FPS: [Uveď konkrétní číslo například u dvou her]`;
 
         const response = await openai.chat.completions.create({
             model: "gemma3:27b",
