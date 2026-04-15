@@ -151,7 +151,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.success) {
                 viewList.innerHTML = data.viewed.map(item => {
                     const price = item.price_preference === 'levnější' ? '(Levný)' : item.price_preference === 'dražší' ? '(Prémiový)' : '(Běžný)';
-                    return `<li>👀 <strong>${item.category}</strong> ${price} <br><small>${new Date(item.created_at).toLocaleTimeString()}</small></li>`;
+                    const pName = item.product_name || 'Načítání názvu...';
+                    const link = `https://www.heureka.cz/?h%5Bfraze%5D=${encodeURIComponent(pName)}`;
+                    
+                    return `<li class="history-item">
+                        👀 <strong>${item.category}</strong> ${price} <br><small>${new Date(item.created_at).toLocaleTimeString()}</small>
+                        <div class="history-tooltip">
+                            <strong>${pName}</strong>
+                            <a href="${link}" target="_blank">🛒 Hledat na Heurece</a>
+                        </div>
+                    </li>`;
                 }).join('');
 
                 searchList.innerHTML = data.searches.map(item => {

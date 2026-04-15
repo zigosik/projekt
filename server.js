@@ -31,6 +31,13 @@ async function initDB() {
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
         `);
+        
+        try {
+            await pool.query('ALTER TABLE viewed_products ADD COLUMN product_name VARCHAR(255)');
+        } catch (e) {
+            // Ignorujeme, sloupec už pravděpodobně v databázi existuje z minula
+        }
+        
         await pool.query(`
           CREATE TABLE IF NOT EXISTS search_history (
             id SERIAL PRIMARY KEY,
@@ -67,11 +74,6 @@ function isVulgar(text) {
 app.post('/api/evaluate-hover', async (req, res) => {
     try {
         const { category, pricePref } = req.body; 
-        
-        await pool.query(
-            'INSERT INTO viewed_products (category, price_preference) VALUES ($1, $2)',
-            [category, pricePref]
-        );
 
         const prompt = `Jsi tvrdý hardwarový expert s naprostou pamětí na světové benchmark žebříčky (Antutu pro mobily/tablety a PassMark/3DMark pro PC a laptopy).
 Tvojí úlohou je vybrat 100% REÁLNÝ dosud existující produkt v kategorii "${category}".
@@ -89,8 +91,20 @@ FPS: [Uveď konkrétní číslo například u dvou her]`;
             model: "gemma3:27b",
             messages: [{ role: 'user', content: prompt }]
         });
+        
+        const aiText = response.choices[0].message.content;
+        
+        // Získání přesného jména produktu z AI vygenerovaného textu
+        const nameMatch = aiText.match(/Název:\s*(.+)/);
+        const productName = nameMatch ? nameMatch[1].trim() : 'Neznámé zařízení';
 
-        res.json({ success: true, text: response.choices[0].message.content });
+        // Uložit do naší Postgres Historie až PO TOM, co získáme název od AI
+        await pool.query(
+            'INSERT INTO viewed_products (category, price_preference, product_name) VALUES ($1, $2, $3)',
+            [category, pricePref, productName]
+        );
+
+        res.json({ success: true, text: aiText });
     } catch (err) {
         console.error("AI Error:", err);
         res.status(500).json({ success: false, error: "Nebylo možné získat odpověď od AI." });
@@ -132,7 +146,7 @@ Alternativa: [Pouze přesný název tvé navrhované alternativy]`;
 // 3. API: Získání historie (abychom mohli do DB i zapisovat i čist) - podle zadání
 app.get('/api/history', async (req, res) => {
     try {
-        const viewedResult = await pool.query('SELECT category, price_preference, created_at FROM viewed_products ORDER BY id DESC LIMIT 5');
+        const viewedResult = await pool.query('SELECT category, price_preference, product_name, created_at FROM viewed_products ORDER BY id DESC LIMIT 5');
         const searchResult = await pool.query('SELECT search_query, is_vulgar, created_at FROM search_history ORDER BY id DESC LIMIT 5');
         
         res.json({
