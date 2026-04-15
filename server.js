@@ -77,7 +77,8 @@ app.post('/api/evaluate-hover', async (req, res) => {
 
         const prompt = `Jsi tvrdý hardwarový expert s naprostou pamětí na světové benchmark žebříčky (Antutu pro mobily/tablety a PassMark/3DMark pro PC a laptopy).
 Tvojí úlohou je vybrat 100% REÁLNÝ dosud existující produkt v kategorii "${category}".
-Výkonnostní preference uživatele je: ${pricePref === 'levnější' ? 'vyber levný model ze spodku benchmarků (malé skóre).' : pricePref === 'dražší' ? 'vyber absolutní vlajkovou loď z TOP 10 tabulek žebříčků (obří skóre).' : 'vyber střední třídu se středním skórem.'}.
+DŮLEŽITÉ PRAVIDLO: Vybírej striktně POUZE moderní věci vydané v letech 2023 nebo 2024, aby se daly na trhu stále běžně zakoupit! Nekopíruj starožitnosti.
+Výkonnostní preference uživatele je: ${pricePref === 'levnější' ? 'vyber co nejlevnější ale moderní model z nižších pater benchmarků.' : pricePref === 'dražší' ? 'vyber absolutní vlajkovou loď současnosti z TOP 10 tabulek žebříčků (závratné skóre).' : 'vyber moderní zlatou střední třídu.'}.
 Vyber reálný kus podle těchto parametrů. Nic dalšího nezdůvodňuj a striktně vydej tento formát:
 
 Název: [Přesný reálný název vybraného produktu]
