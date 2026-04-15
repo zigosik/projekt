@@ -112,7 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await res.json();
             
             if (data.success) {
-                searchResult.innerHTML = data.text;
+                // Připravíme profesionální odkaz na srovnávač cen Heureka
+                const queryEncoded = encodeURIComponent(query);
+                const heurekaLink = `<br><br><strong style="color: #c084fc;">📊 Srovnání cen a nákup:</strong> <a href="https://www.heureka.cz/?h%5Bfraze%5D=${queryEncoded}" target="_blank" style="color: #60a5fa; text-decoration: underline;">Podívat se na Heureku</a>`;
+                
+                // Formátování od AI pro hezčí vzhled
+                let formattedText = data.text.replace(/Hodnocení:/g, '<strong style="color: #38bdf8;">Hodnocení:</strong>')
+                                             .replace(/Alternativa:/g, '<strong style="color: #4ade80;">💡 Tip na lepší alternativu:</strong>');
+                
+                searchResult.innerHTML = formattedText + heurekaLink;
                 searchInput.value = ''; // Vyčištění po úspěchu
             } else {
                 // Pokus vulgárního vyhledávání

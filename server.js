@@ -112,7 +112,10 @@ app.post('/api/search', async (req, res) => {
             return res.json({ success: false, error: "Zadaný název obsahuje zakázaná slova, vyhledávání zrušeno." });
         }
 
-        const prompt = `Zhodnoť nanejvýš ve 2-3 větách produkt nazvaný "${query}". Je tento kus hardwaru dobrý pro běžného uživatele k nákupu?`;
+        const prompt = `Kriticky zhodnoť produkt nazvaný "${query}". Je tento kus hardwaru dobrý pro běžného uživatele k nákupu? Zkus také navrhnout jednu lepší, nebo naopak levnější alternativu.
+Odpověz striktně v tomto formátu (bez dalších řečí):
+Hodnocení: [Tvoje zhodnocení max na 2 věty]
+Alternativa: [Pouze přesný název tvé navrhované alternativy]`;
 
         const response = await openai.chat.completions.create({
             model: "gemma3:27b",
