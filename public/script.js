@@ -59,15 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
             
             aiLoader.classList.add('hidden');
 
-            if (data.success) {
+                // Získáme přesný název hardwaru pro vytvoření 100% fungujícího odkazu
+                const nameMatch = data.text.match(/Název:\s*(.+)/);
+                const queryTerm = nameMatch ? encodeURIComponent(nameMatch[1].trim()) : '';
+                const searchLink = queryTerm ? `<br><br><strong style="color: #c084fc;">🛒 Kde koupit:</strong> <a href="https://www.alza.cz/search.htm?exps=${queryTerm}" target="_blank" style="color: #60a5fa; text-decoration: underline;">Hledat na Alza.cz</a>` : '';
+
                 // Hezky obarvíme odpověď
-                const text = data.text.replace(/Název:/g, '<strong style="color: #38bdf8;">Název:</strong>')
+                let text = data.text.replace(/Název:/g, '<strong style="color: #38bdf8;">Název:</strong>')
                                       .replace(/Cena:/g, '<strong style="color: #fbbf24;">Cena:</strong>')
-                                      .replace(/Odkaz:\s?(https?:\/\/[^\s<]+)/g, '<strong style="color: #c084fc;">💻 Obchod:</strong> <a href="$1" target="_blank" style="color: #60a5fa; text-decoration: underline;">Klikněte zde pro nákup</a>')
-                                      .replace(/Odkaz:/g, '<strong style="color: #c084fc;">💻 Obchod:</strong>') // Fallback
                                       .replace(/Parametry:/g, '<strong style="color: #38bdf8;">Parametry:</strong>')
                                       .replace(/Komentář:/g, '<strong style="color: #818cf8;">Komentář:</strong>')
                                       .replace(/FPS:/g, '<strong style="color: #4ade80;">Herní výkon (FPS):</strong>');
+                
+                // Připojíme generovaný spolehlivější link nakonec
+                text += searchLink;
+                
                 aiResponseContent.innerHTML = text;
             } else {
                 aiResponseContent.innerHTML = `<span class="error-text">Chyba systému: ${data.error}</span>`;
