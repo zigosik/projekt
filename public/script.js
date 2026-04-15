@@ -177,6 +177,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     refreshBtn.addEventListener('click', loadHistory);
 
+    // Řízení okýnek historie pomocí kliknutí (místo pouhého najetí myší)
+    document.addEventListener('click', (e) => {
+        const item = e.target.closest('.history-item');
+        
+        // Kliknutím jinam vždycky zavřít všechna otevřená okénka
+        document.querySelectorAll('.history-item.active').forEach(activeItem => {
+            if (activeItem !== item) {
+                activeItem.classList.remove('active');
+            }
+        });
+
+        // Kliknutím na položku rozbalíme dané okénko (pokud jsme neklikli už na samotný link a nejdeme pryč)
+        if (item && e.target.tagName !== 'A') {
+            item.classList.toggle('active');
+        }
+    });
+
     // Prvotní načtení dat z DB
     loadHistory();
 });

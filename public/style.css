@@ -311,7 +311,7 @@ ul li {
     border-color: #818cf8 transparent transparent transparent;
 }
 
-.history-item:hover .history-tooltip {
+.history-item.active .history-tooltip {
     visibility: visible;
     opacity: 1;
 }
