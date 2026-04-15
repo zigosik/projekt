@@ -79,7 +79,6 @@ Vymysli a popiš konkrétní zařízení. Nezdůvodňuj proč, jen vydej daný f
 
 Název: [Reálný nebo vymyšlený název]
 Cena: [Odhadovaná cena produktu v Kč]
-Odkaz: [Vygeneruj JEN URL odkaz na e-shop (např. https://www.alza.cz/)]
 Parametry: [Procesor, RAM, Displej, Baterka - jen výčet s čárkami]
 Komentář: [Jedna krátká věta, proč to doporučuješ]
 FPS: [Uveď konkrétní číslo například GTA V: 60 FPS, CS2: 120 FPS]`;
