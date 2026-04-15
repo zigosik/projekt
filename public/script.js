@@ -62,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.success) {
                 // Hezky obarvíme odpověď
                 const text = data.text.replace(/Název:/g, '<strong style="color: #38bdf8;">Název:</strong>')
+                                      .replace(/Cena:/g, '<strong style="color: #fbbf24;">Cena:</strong>')
+                                      .replace(/Odkaz:\s?(https?:\/\/[^\s<]+)/g, '<strong style="color: #c084fc;">💻 Obchod:</strong> <a href="$1" target="_blank" style="color: #60a5fa; text-decoration: underline;">Klikněte zde pro nákup</a>')
+                                      .replace(/Odkaz:/g, '<strong style="color: #c084fc;">💻 Obchod:</strong>') // Fallback
                                       .replace(/Parametry:/g, '<strong style="color: #38bdf8;">Parametry:</strong>')
                                       .replace(/Komentář:/g, '<strong style="color: #818cf8;">Komentář:</strong>')
                                       .replace(/FPS:/g, '<strong style="color: #4ade80;">Herní výkon (FPS):</strong>');
