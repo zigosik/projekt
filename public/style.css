@@ -278,7 +278,12 @@ ul li {
 /* History Element Tooltip Okénko */
 .history-item {
     position: relative;
-    cursor: help;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.history-item:hover {
+    background: rgba(255, 255, 255, 0.08); /* Jemné zesvětlení indikující myš */
 }
 
 .history-tooltip {

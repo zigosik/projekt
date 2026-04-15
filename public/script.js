@@ -155,7 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     const link = `https://www.heureka.cz/?h%5Bfraze%5D=${encodeURIComponent(pName)}`;
                     
                     return `<li class="history-item">
-                        👀 <strong>${item.category}</strong> ${price} <br><small>${new Date(item.created_at).toLocaleTimeString()}</small>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <span>👀 <strong>${item.category}</strong> ${price} <br><small>${new Date(item.created_at).toLocaleTimeString()}</small></span>
+                            <span style="font-size: 0.75rem; color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); padding: 2px 6px; border-radius: 4px;">▼ Info</span>
+                        </div>
                         <div class="history-tooltip">
                             <strong>${pName}</strong>
                             <a href="${link}" target="_blank">🛒 Hledat na Heurece</a>
