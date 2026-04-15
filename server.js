@@ -6,6 +6,7 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.set('trust proxy', 1); // Pro správnou kompatibilitu za školním proxy
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -138,6 +139,6 @@ app.get('/api/history', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(\`Server is running on port \${port}\`);
+app.listen(port, "0.0.0.0", () => {
+    console.log(`Server is running on port ${port}`);
 });
