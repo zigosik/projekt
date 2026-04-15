@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Získáme přesný název hardwaru pro vytvoření 100% fungujícího odkazu
                 const nameMatch = data.text.match(/Název:\s*(.+)/);
                 const queryTerm = nameMatch ? encodeURIComponent(nameMatch[1].trim()) : '';
-                const searchLink = queryTerm ? `<br><br><strong style="color: #c084fc;">🛒 Kde koupit:</strong> <a href="https://www.alza.cz/search.htm?exps=${queryTerm}" target="_blank" style="color: #60a5fa; text-decoration: underline;">Hledat na Alza.cz</a>` : '';
+                const searchLink = queryTerm ? `<br><br><strong style="color: #c084fc;">🛒 Kde spolehlivě koupit:</strong> <a href="https://www.heureka.cz/?h%5Bfraze%5D=${queryTerm}" target="_blank" style="color: #60a5fa; text-decoration: underline;">Prohledat nezávisle na Heureka.cz</a>` : '';
 
                 // Hezky obarvíme odpověď
                 let text = data.text.replace(/Název:/g, '<strong style="color: #38bdf8;">Název:</strong>')
